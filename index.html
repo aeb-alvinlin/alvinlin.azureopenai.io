@@ -1,13 +1,990 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>如何搭配 Microsoft Teams 與使用 Azure OpenAI</title>
 </head>
-<body>
 
-Hello!
-
+<body style="font-family:'Times New Roman'; font-size:12pt">
+    <div>
+        <p style="margin-top:0pt; margin-bottom:0pt"><span style="font-weight:bold; color:#ff0000"></span></p>
+        <p style="margin-top:20.9pt; margin-left:62.05pt; margin-bottom:0pt; text-align:justify; line-height:36.45pt">
+            <span style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; color:#0f4761">如何搭配使用
+            </span><span
+                style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; letter-spacing:0.05pt; color:#0f4761; -aw-import:spaces">&#xa0;</span><span
+                style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; color:#0f4761">Teams
+            </span><span
+                style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; letter-spacing:0.05pt; color:#0f4761; -aw-import:spaces">&#xa0;</span><span
+                style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; color:#0f4761">與</span><span
+                style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; letter-spacing:0.05pt; color:#0f4761">
+            </span><span style="font-family:'Microsoft JhengHei'; font-size:22pt; font-weight:bold; color:#0f4761">Azure
+                OpenAI </span></p>
+        <p style="margin-top:25.45pt; margin-bottom:0pt; text-align:justify; line-height:26.45pt"><span
+                style="font-family:'Microsoft JhengHei'; font-size:16pt; color:#0f4761">目錄 </span></p>
+        <ol type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:12.9pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page1_x33.00_y36.92" style="text-decoration:none"><span
+                        style="color:#000000">參考相關文件以便瞭解相依性及前置作業...................................................................................................
+                        2 </span></a></li>
+            <li
+                style="margin-top:24.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page2_x33.00_y288.92" style="text-decoration:none"><span style="color:#000000">啟始 Microsoft
+                        365 Tenant (如果沒有的話)，並進行權限配置: .......................................................... 3
+                    </span></a></li>
+            <li
+                style="margin-top:24pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page28_x33.00_y468.92" style="text-decoration:none"><span style="color:#000000">登入 Azure，提交
+                        Azure OpenAI 的服務申請，取得回覆，並建立服務及部署: .......................... 29 </span></a></li>
+            <li
+                style="margin-top:24.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page75_x33.00_y468.92" style="text-decoration:none"><span
+                        style="color:#000000">下載並安裝</span><span style="color:#000000; -aw-import:spaces">&#xa0;
+                    </span><span style="color:#000000">Visual Studio Code </span><span
+                        style="letter-spacing:0.05pt; color:#000000; -aw-import:spaces">&#xa0;</span><span
+                        style="color:#000000">程式:
+                        ....................................................................................................
+                        76 </span></a></li>
+        </ol>
+        <ol start="5" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:8.05pt; margin-right:11.2pt; margin-left:14.72pt; line-height:36pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page83_x33.00_y468.92" style="text-decoration:none"><span style="color:#000000">開啟 Visual
+                        Studio Code，安裝 Teams Toolkit Extension</span><span style="letter-spacing:0.05pt; color:#000000">
+                    </span><span style="color:#000000">延伸模組，並登入</span><span
+                        style="letter-spacing:0.05pt; color:#000000"> </span><span style="color:#000000">M365 及 Azure:
+                        84 </span></a></li>
+        </ol>
+        <ol start="6" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:24pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page114_x33.00_y468.92" style="text-decoration:none"><span
+                        style="color:#000000">安裝</span><span style="color:#000000; -aw-import:spaces">&#xa0;
+                    </span><span style="color:#000000">Node.js (v18.17.1)
+                        .............................................................................................................................
+                        115 </span></a></li>
+            <li
+                style="margin-top:24.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page118_x33.00_y252.92" style="text-decoration:none"><span
+                        style="color:#000000">開啟</span><span style="color:#000000; -aw-import:spaces">&#xa0;
+                    </span><span style="color:#000000">Node.js</span><span style="letter-spacing:0.05pt; color:#000000">
+                    </span><span style="color:#000000">的命令提示字元,</span><span
+                        style="color:#000000; -aw-import:spaces">&#xa0; </span><span style="color:#000000">然後安裝 TeamsFx
+                        SDK for TypeScript/JavaScript: ............ 119 </span></a></li>
+            <li
+                style="margin-top:24.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page121_x33.00_y630.92" style="text-decoration:none"><span style="color:#000000">下載並安裝
+                        Teams</span><span style="letter-spacing:0.05pt; color:#000000"> </span><span
+                        style="color:#000000">應用程式
+                        .....................................................................................................................
+                        122 </span></a></li>
+        </ol>
+        <ol start="9" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:7.95pt; margin-right:17.35pt; margin-left:14.72pt; line-height:36pt; padding-left:9.28pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page129_x33.00_y360.92" style="text-decoration:none"><span style="color:#000000">複製
+                        Integrating ChatGPT with Microsoft Teams</span><span
+                        style="color:#000000; -aw-import:spaces">&#xa0; </span><span style="color:#000000">在
+                        Github</span><span style="color:#000000; -aw-import:spaces">&#xa0; </span><span
+                        style="color:#000000">的 repository 並啟始</span><span
+                        style="color:#000000; -aw-import:spaces">&#xa0; </span><span style="color:#000000">Debug: 130
+                    </span></a></li>
+        </ol>
+        <ol start="10" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:24.15pt; margin-left:21.68pt; text-align:justify; line-height:19.9pt; padding-left:14.32pt; font-family:'Microsoft JhengHei'">
+                <a href="#_page154_x33.00_y36.92" style="text-decoration:none"><span style="color:#000000">程式會自動建立 Azure
+                        的應用程式註冊,</span><span style="color:#000000; -aw-import:spaces">&#xa0; </span><span
+                        style="color:#000000">並在發佈後可以新增自 Team</span><span style="letter-spacing:0.1pt; color:#000000">
+                    </span><span style="color:#000000">對話。 ................... 155 </span></a></li>
+        </ol><br style="page-break-before:always; clear:both" />
+        <ol type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:8.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>參考相關文件以便瞭解相依性及前置作業</span><a name="_page1_x33.00_y36.92"></a><span> </span></li>
+        </ol>
+        <p style="margin-top:16.1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; line-height:19.9pt"><span
+                style="font-family:'Microsoft JhengHei'">Create a new Microsoft Teams project using Microsoft Teams
+                Toolkit </span></p>
+        <p style="margin:0pt 34.15pt 0pt 18pt; line-height:26.6pt"><a
+                href="https://learn.microsoft.com/zh-tw/microsoftteams/platform/toolkit/toolkit-v4/create-new-project-vs"
+                style="text-decoration:none"><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; text-decoration:underline; color:#467886">https://learn.microsoft.com/zh-tw/microsoftteams/platform/toolkit/toolkit-v4/create-new-project-vs</span><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; color:#000000"> </span></a><span
+                style="font-family:'Microsoft JhengHei'; font-size:10pt; letter-spacing:0.05pt"> </span><span
+                style="font-family:'Microsoft JhengHei'">Prerequisites for creating your Teams app </span><a
+                href="https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/tools-prerequisites"
+                style="text-decoration:none"><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; text-decoration:underline; color:#467886">https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/tools-prerequisites</span><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; color:#000000"> </span></a><span
+                style="font-family:'Microsoft JhengHei'; font-size:10pt; letter-spacing:0.05pt"> </span></p>
+        <p style="margin-top:10.4pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.002.png"
+                width="583" height="170" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:9.3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.003.jpeg"
+                width="582" height="551" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.004.jpeg" width="698" height="326" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="2" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:12.15pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>啟始</span><a name="_page2_x33.00_y288.92"></a><span> Microsoft 365 Tenant (如果沒有的話)，並進行權限配置: </span>
+            </li>
+        </ol>
+        <p style="margin-top:12.95pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.005.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.006.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.007.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.8pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.008.jpeg"
+                width="698" height="360" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.009.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.010.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.011.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.012.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.013.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.014.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.015.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.016.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.017.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.018.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.019.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.020.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.021.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.022.jpeg" width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.023.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:7.3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.024.jpeg"
+                width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.025.jpeg" width="698" height="565" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.026.jpeg" width="698" height="565"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.027.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.028.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.029.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.030.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.031.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.9pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.032.jpeg" width="698" height="515"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.033.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.034.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.9pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.035.jpeg" width="698" height="515"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.036.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.037.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.038.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.039.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.040.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.041.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.042.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.043.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="3" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:13.25pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>登入</span><a name="_page28_x33.00_y468.92"></a><span> Azure，提交 Azure OpenAI 的服務申請，取得回覆，並建立服務及部署:
+                </span></li>
+        </ol>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.044.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.045.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.046.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.047.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.048.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.049.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.050.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.051.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.052.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.053.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.054.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.055.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.056.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.057.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.058.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.059.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.060.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.061.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.062.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.063.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.064.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.065.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.066.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.067.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.068.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.069.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.070.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.071.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.072.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.073.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.074.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.075.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.076.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.077.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:7.3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.078.jpeg"
+                width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.079.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.080.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.081.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.9pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.082.jpeg" width="698" height="515"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.083.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.084.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.085.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.086.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:7.3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.087.jpeg"
+                width="698" height="281" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.088.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.089.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.088.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.089.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.090.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="4" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:13.25pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>下載並安裝</span><a name="_page75_x33.00_y468.92"></a><span style="-aw-import:spaces">&#xa0;
+                </span><span>Visual Studio Code </span><span
+                    style="letter-spacing:0.05pt; -aw-import:spaces">&#xa0;</span><span>程式: </span></li>
+        </ol>
+        <p style="margin-top:6pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.091.jpeg" width="698" height="608"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.092.jpeg" width="524" height="395"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.093.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:0.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.094.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.095.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.096.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:0.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.097.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.098.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.099.jpeg"
+                width="399" height="287" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.100.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.101.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.102.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.103.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="5" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:13.25pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>開啟</span><a name="_page83_x33.00_y468.92"></a><span> Visual Studio Code，安裝 Teams Toolkit
+                    Extension</span><span style="letter-spacing:0.05pt"> </span><span>延伸模組，並登入</span><span
+                    style="letter-spacing:0.05pt"> </span><span>M365 及 Azure: </span></li>
+        </ol>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.104.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.105.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.106.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.107.jpeg" width="698" height="662"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:1.4pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.108.jpeg"
+                width="698" height="620" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:0.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.109.jpeg" width="698" height="574"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.110.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.111.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.112.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.113.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.114.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:10.3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.115.jpeg" width="698" height="370" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.116.jpeg" width="698" height="370" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:10.45pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.117.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.118.jpeg" width="698" height="563" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.119.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.120.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.121.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.122.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.123.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.124.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.125.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.126.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.9pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.127.jpeg" width="698" height="515"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.128.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.129.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.130.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.131.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.132.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.133.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.134.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.135.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.136.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="6" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:13.25pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>安裝</span><a name="_page114_x33.00_y468.92"></a><span style="-aw-import:spaces">&#xa0;
+                </span><span>Node.js (v18.17.1) </span></li>
+        </ol>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.137.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:13.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.138.png" width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:8pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.139.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:16pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.140.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:16pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.141.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:8pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.142.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:16pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.143.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:16pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.144.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:8pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.145.png"
+                width="344" height="267" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="7" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:16.2pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>開啟</span><a name="_page118_x33.00_y252.92"></a><span style="-aw-import:spaces">&#xa0;
+                </span><span>Node.js</span><span style="letter-spacing:0.05pt"> </span><span>的命令提示字元,</span><span
+                    style="-aw-import:spaces">&#xa0; </span><span>然後安裝 TeamsFx SDK for
+                    TypeScript/JavaScript:</span><span style="-aw-import:spaces">&#xa0; </span></li>
+        </ol>
+        <p style="margin-top:13.15pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.146.jpeg" width="698" height="537" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.147.jpeg"
+                width="698" height="615" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.148.jpeg" width="698" height="373"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:8.2pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.149.jpeg"
+                width="698" height="373" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:0.65pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.150.jpeg" width="698" height="742" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="8" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-top:44.95pt; margin-left:14.72pt; text-align:justify; line-height:19.9pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>下載並安裝</span><a name="_page121_x33.00_y630.92"></a><span> Teams</span><span
+                    style="letter-spacing:0.05pt"> </span><span>應用程式 </span></li>
+        </ol>
+        <p style="margin-top:2.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.151.jpeg" width="698" height="258" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:4.85pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.152.jpeg" width="698" height="258" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:7.1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.153.jpeg"
+                width="524" height="395" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:3.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.154.jpeg"
+                width="434" height="279" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:9.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.155.jpeg"
+                width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:6.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.156.jpeg" width="301" height="366" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:14.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.157.jpeg" width="439" height="435" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:7.25pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.158.jpeg" width="437" height="413" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:14.75pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.159.jpeg" width="439" height="435" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:6pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.160.jpeg"
+                width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:12.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.161.jpeg" width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:6pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.162.jpeg"
+                width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:12.5pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img
+                src="Desktop.163.jpeg" width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:6pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.164.jpeg"
+                width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:13pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.165.jpeg"
+                width="626" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:6pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.166.jpeg"
+                width="627" height="415" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <ol start="9" type="1" style="margin:0pt; padding-left:0pt">
+            <li
+                style="margin-right:20.5pt; margin-left:14.72pt; line-height:36pt; padding-left:3.18pt; font-family:'Microsoft JhengHei'">
+                <span>複製</span><a name="_page129_x33.00_y360.92"></a><span> Integrating ChatGPT with Microsoft
+                    Teams</span><span style="-aw-import:spaces">&#xa0; </span><span>在 Github</span><span
+                    style="-aw-import:spaces">&#xa0; </span><span>的 repository</span><span
+                    style="letter-spacing:0.05pt"> </span><span>並啟始</span><span style="-aw-import:spaces">&#xa0;
+                </span><span>Debug: Integrating ChatGPT with Microsoft Teams </span></li>
+        </ol>
+        <p style="margin-top:10.1pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; line-height:16.5pt"><a
+                href="https://github.com/denlai-mshk/teamsgpt-azureopenai" style="text-decoration:none"><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; text-decoration:underline; color:#467886">https://github.com/denlai-mshk/teamsgpt-azureopenai</span><span
+                    style="font-family:'Microsoft JhengHei'; font-size:10pt; color:#000000"> </span></a><span
+                style="font-family:'Microsoft JhengHei'; font-size:10pt; letter-spacing:0.2pt"> </span></p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.167.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.168.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.169.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.170.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.171.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:5.05pt; margin-left:18pt; margin-bottom:0pt; text-align:justify; font-size:1pt"><br
+                style="page-break-before:always; clear:both" /><img src="Desktop.172.jpeg" width="698" height="563"
+                alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:8.8pt; margin-left:18pt; margin-bottom:0pt; text-align:justify"><img src="Desktop.173.jpeg"
+                width="698" height="373" alt=""
+                style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
+        </p>
+        <p style="margin-top:0pt; margin-bottom:0pt"><span style="font-weight:bold; color:#ff0000"></span></p>
+        <div style="-aw-headerfooter-type:footer-primary; clear:both">
+            <p style="margin-top:0pt; margin-bottom:0pt"><span style="font-weight:bold; color:#ff0000"></span></p>
+        </div>
+    </div>
 </body>
+
 </html>
